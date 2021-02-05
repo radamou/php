@@ -8,20 +8,14 @@ $shipsLoader = $container->getShipLoader();
 $ships = $shipsLoader->fetchAll();
 
 $errorMessage = '';
+
 if (isset($_GET['error'])) {
-    switch ($_GET['error']) {
-        case 'missing_data':
-            $errorMessage = 'Don\'t forget to select some ships to battle!';
-            break;
-        case 'bad_ships':
-            $errorMessage = 'You\'re trying to fight with a ship that\'s unknown to the galaxy?';
-            break;
-        case 'bad_quantities':
-            $errorMessage = 'You pick strange numbers of ships to battle - try again.';
-            break;
-        default:
-            $errorMessage = 'There was a disturbance in the force. Try again.';
-    }
+    $errorMessage = match ($_GET['error']) {
+        'missing_data' => 'Don\'t forget to select some ships to battle!',
+        'bad_ships' => 'You\'re trying to fight with a ship that\'s unknown to the galaxy?',
+        'bad_quantities' => 'You pick strange numbers of ships to battle - try again.',
+        default => 'There was a disturbance in the force. Try again.'
+    };
 }
 ?>
 

@@ -13,17 +13,12 @@ use App\Content\Repository\AbstractRepository;
 
 class Container
 {
-    private $configuration;
     private $connection;
     private $battleManager;
     private $shipLoader;
     private $jsonFixtureLoader;
 
-
-    public function __construct(array $configuration)
-    {
-        $this->configuration = $configuration;
-    }
+    public function __construct(private array $configuration){}
 
     public function getConnection(): Connection
     {

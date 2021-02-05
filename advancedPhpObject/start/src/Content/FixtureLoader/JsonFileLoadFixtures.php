@@ -21,11 +21,8 @@ class JsonFileLoadFixtures implements LoaderInterface
             $jsonContents = \Safe\file_get_contents($this->filename);
 
             return \Safe\json_decode($jsonContents, true);
-        } catch (FilesystemException $e) {
-            throw new ReadFileException(\Safe\sprintf(
-                'Impossible to read this file %s',
-                $e->getMessage()
-            ));
+        } catch (FilesystemException ) {
+            throw new ReadFileException(\Safe\sprintf('Impossible to read this file %s', 'er'));
         }
     }
 

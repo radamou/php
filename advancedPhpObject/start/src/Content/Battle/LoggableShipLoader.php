@@ -7,12 +7,9 @@ use App\Content\Entity\AbstractShip;
 
 class LoggableShipLoader implements ShipLoaderInterface
 {
-    private $shipLoader;
-
-    public function __construct(ShipLoaderInterface $shipLoader)
-    {
-        $this->shipLoader = $shipLoader;
-    }
+    public function __construct(
+        private ShipLoaderInterface $shipLoader
+    ){}
 
     public function fetchAll(): ShipCollection
     {

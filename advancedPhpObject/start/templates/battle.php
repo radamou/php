@@ -36,7 +36,13 @@ if ($ship1Quantity <= 0 || $ship2Quantity <= 0) {
 }
 
 $battleManager = $container->getBattleManager();
-$battleResult = $battleManager->battle($ship1, $ship1Quantity, $ship2, $ship2Quantity, $battleType);
+$battleResult = $battleManager->battle(
+        ship1: $ship1,
+        ship1Quantity: $ship1Quantity,
+        ship2: $ship2,
+        ship2Quantity: $ship2Quantity,
+        battleType: $battleType
+);
 
 ?>
 

@@ -4,19 +4,11 @@ namespace App\Content\Entity;
 
 class BattleResult
 {
-    private $winningShip;
-    private $losingShip;
-    private $useJediPowers;
-
     public function __construct(
-        ?AbstractShip $winningShip,
-        ?AbstractShip $losingShip,
-        bool $useJediPowers
-    ) {
-        $this->winningShip = $winningShip;
-        $this->losingShip = $losingShip;
-        $this->useJediPowers = $useJediPowers;
-    }
+        private ?AbstractShip $winningShip,
+        private ?AbstractShip $losingShip,
+        private bool $useJediPowers
+    ) {}
 
     public function getWinningShip(): ?AbstractShip
     {

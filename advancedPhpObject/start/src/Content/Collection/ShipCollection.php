@@ -2,19 +2,9 @@
 
 namespace App\Content\Collection;
 
-use App\Content\Entity\AbstractShip;
-
 class ShipCollection implements \ArrayAccess, \IteratorAggregate, \Countable
 {
-    /**
-     * @var AbstractShip[]
-     */
-    private $ships;
-
-    public function __construct(array $ships)
-    {
-        $this->ships = $ships;
-    }
+    public function __construct(private array $ships){}
 
     public function offsetExists($offset)
     {

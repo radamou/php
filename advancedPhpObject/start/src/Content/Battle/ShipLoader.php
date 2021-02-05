@@ -12,12 +12,9 @@ use App\Internal\Storage\LoaderInterface;
 
 class ShipLoader implements ShipLoaderInterface
 {
-    private $jsonFixturesLoader;
-
-    public function __construct(LoaderInterface $jsonFixturesLoader)
-    {
-        $this->jsonFixturesLoader = $jsonFixturesLoader;
-    }
+    public function __construct(
+        private LoaderInterface $jsonFixturesLoader
+    ){}
 
     public function fetchAll(): ShipCollection
     {
@@ -44,25 +41,12 @@ class ShipLoader implements ShipLoaderInterface
             return null;
         }
 
-        switch ($data['team']) {
-            case 'empire':
-                $ship = (new Ship())
-                    ->setJediFactor($data['jedi_factor']);
-                break;
-            case 'rebel':
-                $ship = new RebelShip();
-                break;
-            case 'broken':
-                $ship = new BrokenShip();
-                break;
-            case 'bounty hunter':
-                $ship = new BountyHunterShip();
-                break;
-            default:
-                $ship = (new Ship())
-                    ->setJediFactor($data['jedi_factor']);
-
-        }
+        $ship = match ($data['team']) {
+            'rebel' => new RebelShip(),
+            'broken' => new BrokenShip(),
+            'bounty hunter' => new BountyHunterShip(),
+             default => (new Ship())->setJediFactor($data['jedi_factor'])
+        };
 
         return $ship->setId($data['id'])
             ->setName($data['name'])

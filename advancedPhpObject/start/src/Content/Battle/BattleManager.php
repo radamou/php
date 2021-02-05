@@ -7,9 +7,9 @@ use App\Content\Entity\BattleResult;
 
 class BattleManager
 {
-    const TYPE_NORMAL = 'normal';
-    const TYPE_NO_JEDI = 'no_jedi';
-    const TYPE_ONLY_JEDI = 'only_jedi';
+    private const TYPE_NORMAL = 'normal';
+    private const TYPE_NO_JEDI = 'no_jedi';
+    private const TYPE_ONLY_JEDI = 'only_jedi';
 
     public function battle(
         AbstractShip $ship1,
@@ -39,8 +39,8 @@ class BattleManager
             }
 
             // now battle them normally
-            $ship1Health = $ship1Health - ($ship2->getWeaponPower() * $ship2Quantity);
-            $ship2Health = $ship2Health - ($ship1->getWeaponPower() * $ship1Quantity);
+            $ship1Health -= ($ship2->getWeaponPower() * $ship2Quantity);
+            $ship2Health -= ($ship1->getWeaponPower() * $ship1Quantity);
         }
 
         if ($ship1Health <= 0 && $ship2Health <= 0) {
@@ -68,15 +68,15 @@ class BattleManager
     {
         $jediHeroProbability = $ship->getJediFactor() / 100;
 
-        return \mt_rand(1, 100) <= ($jediHeroProbability*100);
+        return \random_int(1, 100) <= ($jediHeroProbability*100);
     }
 
     public static function getAllBattleTypesWithDescriptions(): array
     {
-        return array(
+        return [
             self::TYPE_NORMAL => 'Normal',
             self::TYPE_NO_JEDI => 'No Jedi Powers',
             self::TYPE_ONLY_JEDI => 'Only Jedi Powers'
-        );
+        ];
     }
 }
